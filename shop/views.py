@@ -1,8 +1,8 @@
 from rest_framework import viewsets
-from .models import Category, Product, Cart, CartItem, Discount, Combo
+from .models import Category, Product, Cart, CartItem, Discount, Combo, Review
 from .serializers import (
     CategorySerializer, ProductSerializer, CartSerializer,
-    CartItemSerializer, DiscountSerializer, ComboSerializer
+    CartItemSerializer, DiscountSerializer, ComboSerializer, ReviewSerializer
 )
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -29,5 +29,14 @@ class CartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
 
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        product_id = self.request.query_params.get('product')
+        if product_id:
+            return self.queryset.filter(product_id=product_id)
+        return self.queryset
 
 # Create your views here.

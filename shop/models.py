@@ -1,4 +1,13 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+class Shop(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Название магазина")
+    address = models.TextField(blank=True, verbose_name="Адрес магазина")
+
+    def __str__(self):
+        return self.name
+
 
 # Категории товаров
 class Category(models.Model):
@@ -20,6 +29,18 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class Review(models.Model): #отзывы
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    author_name = models.CharField(max_length=100)  # кто оставил отзыв (можно позже связать с User)
+    text = models.TextField()
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Отзыв на {self.product.name} от {self.author_name}"
+
 # Скидки
 class Discount(models.Model):
     name = models.CharField(max_length=100)
@@ -38,22 +59,24 @@ class Combo(models.Model):
     def __str__(self):
         return self.name
 
-# Корзина клиента
+
 class Cart(models.Model):
     client = models.ForeignKey('client.Client', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Cart #{self.id} for {self.client}"
+        return f"Корзина #{self.id} клиента {self.client.full_name}"
+
 
 # Позиции в корзине
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey('shop.Product', on_delete=models.CASCADE, related_name='shop_cartitems')
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
+
 
 
 # Create your models here.
