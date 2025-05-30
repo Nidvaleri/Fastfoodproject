@@ -12,6 +12,7 @@ class Shop(models.Model):
 # Категории товаров
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to='categories/',blank=True,null=True)
 
     def __str__(self):
         return self.name
@@ -60,7 +61,7 @@ class Combo(models.Model):
         return self.name
 
 
-class Cart(models.Model):
+class Cart(models.Model): #корзина
     client = models.ForeignKey('client.Client', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

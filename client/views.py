@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import generics
 from .models import Client, CartItem, Order
 from .serializers import ClientSerializer, CartItemSerializer, OrderSerializer
@@ -17,11 +16,11 @@ class ClientRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 class CartItemListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = CartItemSerializer
 
-    def get_queryset(self):
+    def get_queryset(self): # Метод для получения queryset (набора данных)
         client_id = self.kwargs['client_id']
         return CartItem.objects.filter(client_id=client_id)
 
-    def perform_create(self, serializer):
+    def perform_create(self, serializer):  # Метод вызывается при создании нового объекта
         client_id = self.kwargs['client_id']
         serializer.save(client_id=client_id)
 
@@ -38,5 +37,3 @@ class OrderRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
-
-# Create your views here.

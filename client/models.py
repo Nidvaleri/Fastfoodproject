@@ -1,14 +1,12 @@
 from django.db import models
 
-
-
 class Client(models.Model):
-    full_name = models.CharField(max_length=100, verbose_name="Имя клиента")
+    name = models.CharField(max_length=100, verbose_name="Имя клиента")
     phone = models.CharField(max_length=20, verbose_name="Телефон")
     address = models.TextField(verbose_name="Адрес доставки")
 
     def __str__(self):
-        return f"{self.full_name} ({self.phone})"
+        return f"{self.name} ({self.phone})"
 
 class CartItem(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='cart_items')
