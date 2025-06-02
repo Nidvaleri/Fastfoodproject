@@ -12,10 +12,12 @@ class Shop(models.Model):
 # Категории товаров
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='categories/',blank=True,null=True)
+    description = models.TextField(blank=True)  # добавь это
+    photo = models.ImageField(upload_to='categories/', blank=True, null=True)
 
     def __str__(self):
         return self.name
+
 
 # Продукты
 class Product(models.Model):
