@@ -18,9 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.urls import path
-
+from . import views
 
 urlpatterns = [
+    path('', views.home, name='home'),
+    path('menu/', views.menu, name='menu'),
+    path('reviews/', views.reviews, name='reviews'),
+    path('contacts/', views.contacts, name='contacts'),
+    path('order/', views.order, name='order'),
     path('admin/', admin.site.urls),
     path('api/orders/', include('orders.urls')),
     path('api/shop/', include('shop.urls')),
@@ -30,7 +35,5 @@ urlpatterns = [
     path('api/token/',TokenObtainPairView.as_view(),name='token_obtain_pair'),
     #URLдляобновлениятокенааутентификации
     path('api/token/refresh/',TokenRefreshView.as_view(),name='token_refresh'),
-
-
-
+    path('', include('frontend.urls')),
 ]

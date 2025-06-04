@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>По Шаурме</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- Навигация -->
+  <header class="header">
+    <div class="logo">
+      <img src="{% static 'images/shaurma-icon.png' %}" alt="Логотип">
+      <span>ПО ШАУРМЕ</span>
+    </div>
+    <nav class="nav">
+      <a href="{% url 'home' %}">Главная</a>
+      <a href="{% url 'menu' %}">Меню</a>
+      <a href="{% url 'reviews' %}">Отзывы</a>
+      <a href="{% url 'contacts' %}">Контакты</a>
+    </nav>
+  </header>
+
+  <!-- Баннер -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>ПО ШАУРМЕ</h1>
+      <a href="{% url 'order' %}" class="btn-order">ЗАКАЗАТЬ СЕЙЧАС</a>
+    </div>
+    <img src="{% static 'images/shaurma.jpg' %}" alt="Шаурма">
+  </section>
+
+  <!-- Популярные блюда -->
+  <section class="popular">
+    <h2>Популярные блюда</h2>
+    <div class="dishes">
+      {% for dish in dishes %}
+      <div class="dish">
+        <img src="{{ dish.image_url }}" alt="{{ dish.name }}">
+        <p>{{ dish.name }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Отзывы -->
+  <section class="reviews">
+    <h2>Отзывы</h2>
+    <div class="review-list">
+      {% for review in reviews %}
+      <div class="review">
+        <p class="quote">“{{ review.text }}”</p>
+        <p class="author">{{ review.author }}</p>
+      </div>
+      {% endfor %}
+    <
