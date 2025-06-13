@@ -75,7 +75,7 @@ class OrderSerializer(serializers.ModelSerializer):
         for item_data in items_data:
             OrderItem.objects.create(order=order, **item_data)
 
-        # после создания — обновим сумму
+        
         total = order.calculate_total_price()
         order.payment_amount = total if order.payment_method == 'cash' else None
         order.save()
