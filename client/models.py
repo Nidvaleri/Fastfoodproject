@@ -55,5 +55,4 @@ class Order(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new', verbose_name="Статус заказа")
 
     def __str__(self):
-        # заменил client.full_name на client.name, т.к. такого поля нет
         return f"Заказ #{self.id} для {self.client.name} ({self.get_status_display()})"

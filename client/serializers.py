@@ -40,6 +40,7 @@ class CartItemSerializer(serializers.ModelSerializer):
         model = CartItem
         fields = ['id', 'client', 'product', 'product_id', 'quantity', 'added_at']
         read_only_fields = ['id', 'added_at']
+        ref_name = 'ClientCartItemSerializer'
 
 
 class OrderSerializer(serializers.ModelSerializer):

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'delivery',
     'client',
     'orders',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
@@ -83,8 +84,9 @@ TEMPLATES = [
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # папка static
+    os.path.join(BASE_DIR, 'static'),
 ]
+
 
 
 WSGI_APPLICATION = 'po_shaurme1.wsgi.application'
@@ -150,4 +152,7 @@ SIMPLE_JWT = {
 
 TELEGRAM_BOT_TOKEN = "7974218917:AAGLHGNQlFse7y9pAyOp8w2xMsieW7mrLdo"
 TELEGRAM_CHAT_ID = 8045428012
+
+WEBHOOK_SECRET = 'poshaur127'
+
 

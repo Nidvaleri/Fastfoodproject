@@ -32,7 +32,7 @@ class Courier(models.Model):
         validators=[
             MinLengthValidator(3, message="Зона доставки должна содержать минимум 3 символа")
         ],
-        help_text="Например: Южный район, Центр и т.д."
+        help_text="Например: Центр и т.д."
     )
 
     shop = models.ForeignKey(

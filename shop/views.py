@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Category, Product, Cart, CartItem, Discount, Combo, Review
 from .serializers import (
@@ -38,5 +39,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
         if product_id:
             return self.queryset.filter(product_id=product_id)
         return self.queryset
+
+def index(request):
+    return render(request, 'index.html')
 
 # Create your views here.

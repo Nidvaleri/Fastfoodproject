@@ -1,5 +1,3 @@
-# serializers.py
-
 from rest_framework import serializers
 from .models import Category, Product, Cart, CartItem, Discount, Combo, Review
 
@@ -91,6 +89,7 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = '__all__'
+        ref_name = 'ShopCartItemSerializer'
 
 
 class ReviewSerializer(serializers.ModelSerializer):

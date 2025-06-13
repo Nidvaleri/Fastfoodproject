@@ -17,7 +17,6 @@ def notify_new_order(sender, instance, created, **kwargs):
         send_telegram_message(message)
 
 
-
 @receiver(post_delete, sender=Order)
 def notify_order_deleted(sender, instance, **kwargs):
     message = f"❌ Заказ #{instance.id} от {instance.client_name} был удалён."
