@@ -22,11 +22,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('', index, name='home'),
     path('admin/', admin.site.urls),
-
-    # Подключаем urls приложения orders только один раз,
-    # чтобы все api заказов и webhook были доступны через /api/
     path('api/', include('orders.urls')),
-
     path('api/shop/', include('shop.urls')),
     path('api/client/', include('client.urls')),
     path('api/delivery/', include('delivery.urls')),
