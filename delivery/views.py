@@ -5,7 +5,7 @@ from .models import Courier
 from .serializers import CourierSerializer
 
 
-@csrf_exempt  # отключаем CSRF для простоты (убери, если хочешь защиту)
+@csrf_exempt  
 def courier_list(request):
     if request.method == 'GET':
         couriers = Courier.objects.all()
